@@ -193,3 +193,54 @@ function google_auth_url()
     return $auth_url;
 
 }
+
+function google_file_headers($google_id)
+{
+
+    global $connect;
+
+    $query = 'SELECT *
+        FROM media
+        WHERE google_id = "'.$connect->real_escape_string($google_id).'"
+        LIMIT 1';
+    $result = mysqli_query($connect, $query);
+    $media = mysqli_fetch_assoc($result);
+
+    if($media['type'] == 'image')
+    {
+        
+        $info = @getimagesize('https://lh3.googleusercontent.com/d/'.$media['google_id']);
+        $headers = @get_headers('https://lh3.googleusercontent.com/d/'.$media['google_id'], 1);
+
+        return array(
+            'content_type' => $headers['Content-Type'],
+            'content_length' => $headers['Content-Length'],
+            'content_width' => $info[0],
+            'content_height' => $info[1],
+        );
+
+    }
+    elseif($media['type'] == 'video')
+    {
+        
+        $headers = @get_headers('https://drive.google.com/uc?export=download&id='.$media['google_id'], 1);
+        
+        return array(
+            'content_type' => $headers['Content-Type'][1],
+            'content_length' => $headers['Content-Length'][1],
+        );
+
+    }
+    elseif($media['type'] == 'audio')
+    {
+
+        $headers = @get_headers('https://drive.google.com/uc?export=download&id='.$media['google_id'], 1);
+
+        return array(
+            'content_type' => $headers['Content-Type'][1],
+            'content_length' => $headers['Content-Length'][1],
+        );
+
+    }
+
+}
