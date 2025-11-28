@@ -4,7 +4,7 @@ if(!isset($_GET['key']))
 {
 
     message_set('Image Error', 'There was an error loading the specified image.', 'red');
-    header_redirect('/images/list');
+    header_redirect('/image/list');
  
 }
 
@@ -19,7 +19,7 @@ if(!mysqli_num_rows($result))
 {
 
     message_set('Image Error', 'There was an error loading the specified image.', 'red');
-    header_redirect(ENV_DOMAIN.'/images/list');
+    header_redirect(ENV_DOMAIN.'/image/list');
 
 }
 
@@ -39,7 +39,7 @@ if(!$media['content_type'])
         LIMIT 1';
     mysqli_query($connect, $query);
 
-    header_redirect(ENV_DOMAIN.'/images/details/'.$_GET['key']);
+    header_redirect(ENV_DOMAIN.'/image/details/'.$_GET['key']);
 
 }
 
@@ -122,7 +122,7 @@ while($record = mysqli_fetch_assoc($result))
 <hr>
 
 <a
-    href="<?=$_SERVER['HTTP_REFERER'] ?? ENV_DOMAIN.'/images/list'?>"
+    href="<?=$_SERVER['HTTP_REFERER'] ?? ENV_DOMAIN.'/image/list'?>"
     class="w3-button w3-white w3-border"
 >
     <i class="fa-solid fa-arrow-left fa-padding-right"></i> Back to Image List

@@ -5,37 +5,49 @@ function navigation_array($selected = false)
 
     $navigation = [
         [
-            'title' => 'Events',
+            'title' => 'Stock Media',
             'sections' => [
                 [
-                    'title' => 'Events',
+                    'title' => 'Stock Media',
                     'id' => 'admin-content',
                     'pages' => [
                         [
-                            'icon' => 'events',
+                            'icon' => 'media',
                             'url' => '/admin/dashboard',
-                            'title' => 'Events',
+                            'title' => 'Stock Media',
                             'sub-pages' => [
                                 [
                                     'title' => 'Dashboard',
                                     'url' => '/admin/dashboard',
                                     'colour' => 'red',
                                 ],[
-                                    'title' => 'Add Event',
-                                    'url' => '/admin/add',
+                                    'title' => 'Images',
+                                    'url' => '/admin/image/list',
+                                    'colour' => 'red',
+                                ],[
+                                    'title' => 'Video',
+                                    'url' => '/admin/video/list',
+                                    'colour' => 'red',
+                                ],[
+                                    'title' => 'Audio',
+                                    'url' => '/admin/audio/list',
+                                    'colour' => 'red',
+                                ],[
+                                    'title' => 'Tags',
+                                    'url' => '/admin/tag/list',
                                     'colour' => 'red',
                                 ],[
                                     'br' => '---',
                                 ],[
-                                    'title' => 'Visit Events App',
-                                    'url' => 'https://events.brickmmo.com',
+                                    'title' => 'Visit Media App',
+                                    'url' => 'https://media.brickmmo.com',
                                     'colour' => 'orange',
                                     'icon' => 'fa-solid fa-arrow-up-right-from-square',
                                 ],[
                                     'br' => '---',
                                 ],[
                                     'title' => 'Uptime Report',
-                                    'url' => 'https://uptime.brickmmo.com/details/9',
+                                    'url' => 'https://uptime.brickmmo.com/details/16',
                                     'colour' => 'orange',
                                     'icons' => 'bm-uptime',
                                 ],[
@@ -59,7 +71,7 @@ function navigation_array($selected = false)
         $selected = str_replace('//', '/', $selected);
         $selected = str_replace('.php', '', $selected);
         $selected = str_replace('.', '/', $selected);
-        $selected = substr($selected, 0, strrpos($selected, '/'));
+        $selected = substr($selected, 0, strpos($selected, '/'));
 
         foreach($navigation as $levels)
         {

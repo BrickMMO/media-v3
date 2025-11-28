@@ -3,75 +3,54 @@
 security_check();
 admin_check();
 
-if (isset($_GET['delete'])) 
-{
-
-    $query = 'DELETE FROM events 
-        WHERE id = '.$_GET['delete'].'
-        LIMIT 1';
-    mysqli_query($connect, $query);
-
-    message_set('Delete Success', 'Event has been deleted.');
-    header_redirect('/admin/dashboard');
-    
-}
-elseif (isset($_GET['copy'])) 
-{
-
-    $query = 'INSERT INTO events (
-            name,
-            description,
-            location,
-            registration, 
-            online, 
-            thumbnail,
-            banner,
-            starts_at,
-            ends_at,
-            created_at,
-            updated_at,
-            deleted_at
-        )
-        SELECT CONCAT("Copy of ",name),
-            description,
-            location,
-            registration, 
-            online, 
-            thumbnail,
-            banner,
-            starts_at,
-            ends_at,
-            NOW(),
-            NOW(),
-            NULL
-        FROM events
-        WHERE id = '.$_GET['copy'];
-    mysqli_query($connect, $query);
-
-    message_set('Copy Success', 'Event has been copied.');
-    header_redirect('/admin/dashboard');
-    
-}
-
-define('APP_NAME', 'Colours');
+define('APP_NAME', 'Stock Media');
 define('PAGE_TITLE', 'Dashboard');
 define('PAGE_SELECTED_SECTION', 'admin-dashboard');
 define('PAGE_SELECTED_SUB_PAGE', '/admin/dashboard');
 
 include('../templates/html_header.php');
 include('../templates/nav_header.php');
-include('../templates/nav_slideout.php');
 include('../templates/nav_sidebar.php');
 include('../templates/main_header.php');
 
 include('../templates/message.php');    
 
-$query = 'SELECT * 
-    FROM events
-    ORDER BY starts_at DESC';    
-$result = mysqli_query($connect, $query);
+$query = 'SELECT *
+    FROM media
+    WHERE type = "image"
+    AND deleted_at IS NULL';
+$image_count = mysqli_num_rows(mysqli_query($connect, $query));
 
-$events_count = mysqli_num_rows($result);
+$query = 'SELECT *
+    FROM media
+    WHERE type = "video"
+    AND deleted_at IS NULL';
+$video_count = mysqli_num_rows(mysqli_query($connect, $query));
+
+$query = 'SELECT *
+    FROM media
+    WHERE type = "audio"
+    AND deleted_at IS NULL';
+$audio_count = mysqli_num_rows(mysqli_query($connect, $query));
+
+$query = 'SELECT *
+    FROM downloads';
+$download_count = mysqli_num_rows(mysqli_query($connect, $query));
+
+$query = 'SELECT media.*,(
+        SELECT COUNT(*)
+        FROM downloads
+        WHERE downloads.media_id = media.id
+    ) AS downloads_count,(
+        SELECT MAX(downloads.created_at)
+        FROM downloads
+        WHERE downloads.media_id = media.id
+    ) AS last_download
+    FROM media
+    HAVING downloads_count > 0
+    ORDER BY downloads_count DESC
+    LIMIT 10';
+$result = mysqli_query($connect, $query);
 
 ?>
 
@@ -79,29 +58,28 @@ $events_count = mysqli_num_rows($result);
 
 <h1 class="w3-margin-top w3-margin-bottom">
     <img
-        src="https://cdn.brickmmo.com/icons@1.0.0/events.png"
+        src="https://cdn.brickmmo.com/icons@1.0.0/media.png"
         height="50"
         style="vertical-align: top"
     />
-    Events
+    Stock Media
 </h1>
 
 <p>
-    Number of events: <span class="w3-tag w3-blue"><?=$events_count?></span>    
+    Total Images: <span class="w3-tag w3-blue"><?=$image_count?></span> 
+    Total Video: <span class="w3-tag w3-blue"><?=$video_count?></span> 
+    Total Audio: <span class="w3-tag w3-blue"><?=$audio_count?></span> 
+    Total Downloads: <span class="w3-tag w3-blue"><?=$download_count?></span>
 </p>
 
 <hr />
 
-<h2>Event List</h2>
+<h2>Popular Media</h2>
 
 <table class="w3-table w3-bordered w3-striped w3-margin-bottom">
     <tr>
         <th class="bm-table-icon"></th>
-        <th class="bm-table-icon"></th>
         <th>Name</th>
-        <th class="bm-table-icon"></th>
-        <th class="bm-table-icon"></th>
-        <th class="bm-table-icon"></th>
         <th class="bm-table-icon"></th>
         <th class="bm-table-icon"></th>
     </tr>
@@ -109,16 +87,9 @@ $events_count = mysqli_num_rows($result);
     <?php while ($record = mysqli_fetch_assoc($result)): ?>
         <tr>
             <td>
-                <?php if($record['thumbnail']): ?>
+                <?php if($record['type'] != 'audio'): ?>
                     <a href="/admin/thumbnail/<?=$record['id'] ?>">
-                        <img src="<?=$record['thumbnail']?>" width="70">
-                    </a>
-                <?php endif; ?>
-            </td>
-            <td>
-                <?php if($record['banner']): ?>
-                    <a href="/admin/banner/<?=$record['id'] ?>">
-                        <img src="<?=$record['banner']?>" width="70">
+                        <img src="https://lh3.googleusercontent.com/d/<?=$record['google_id']?>=w800-h800-c" width="70">
                     </a>
                 <?php endif; ?>
             </td>
@@ -126,55 +97,38 @@ $events_count = mysqli_num_rows($result);
                 <?=$record['name'] ?>
                 <br>
                 <small>
-                    Location: <?=$record['location']?>
+                    Uploaded: <span class="w3-bold"><?=time_elapsed_string($record['created_at'])?></span>
                     <br>
-                    Date: <?=date_to_format($record['starts_at'], 'SHORT')?>
-                    <?php if($record['registration']): ?>
-                        <br>
-                        Registration: <a href="<?=$record['registration']?>"><?=string_shorten($record['registration'], 50)?></a>
-                    <?php endif; ?>
-                    <?php if($record['online']): ?>
-                        <br>
-                        Online: <a href="<?=$record['online']?>"><?=string_shorten($record['online'], 50)?></a>
-                    <?php endif; ?>
+                    Downloads: <span class="w3-bold"><?=$record['downloads_count']?></span>
+                    <br>
+                    Last Downloaded: 
+                    <span class="w3-bold"><?=time_elapsed_string($record['last_download'])?></span>
+                    <br>
+                    Google ID: 
+                    <a href="https://drive.google.com/file/d/<?=$record['google_id']?>/preview">
+                        <?=$record['google_id']?>
+                    </a>
+                    <br>
+                    Tags:
+                    <?php foreach(media_tags($record['id']) as $tag):?>
+                        <span class="w3-tag w3-blue"><?=$tag['name']?></span>
+                    <?php endforeach; ?>
                 </small>
             </td>
             <td>
-                <a href="/admin/thumbnail/<?=$record['id'] ?>">
-                    <i class="fa-solid fa-image"></i>
+                <a href="<?=ENV_DOMAIN?>/<?=$record['type']?>/details/<?=$record['id'] ?>">
+                    <i class="fa-solid fa-magnifying-glass"></i>
                 </a>
             </td>
             <td>
-                <a href="/admin/banner/<?=$record['id'] ?>">
-                    <i class="fa-solid fa-panorama"></i>
-                </a>
-            </td>
-            <td>
-                <a href="#" onclick="return confirmModal('Are you sure you want to copy the event <?=$record['name'] ?>?', '/admin/dashboard/copy/<?=$record['id'] ?>');">
-                    <i class="fa-solid fa-copy"></i>
-                </a>
-            </td>
-            <td>
-                <a href="/admin/edit/<?=$record['id'] ?>">
+                <a href="<?=ENV_DOMAIN?>/admin/<?=$record['type']?>/edit/<?=$record['id'] ?>">
                     <i class="fa-solid fa-pencil"></i>
-                </a>
-            </td>
-            <td>
-                <a href="#" onclick="return confirmModal('Are you sure you want to delete the event <?=$record['name'] ?>?', '/admin/dashboard/delete/<?=$record['id'] ?>');">
-                    <i class="fa-solid fa-trash-can"></i>
                 </a>
             </td>
         </tr>
     <?php endwhile; ?>
 
 </table>
-
-<a
-    href="/admin/add"
-    class="w3-button w3-white w3-border"
->
-    <i class="fa-solid fa-pen-to-square fa-padding-right"></i> Add Event
-</a>
 
 
 <!--

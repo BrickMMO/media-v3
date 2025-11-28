@@ -6,7 +6,7 @@ if(isset($_GET['q']))
     $q = string_url($_GET['q']);
     if($q != $_GET['q'])
     {
-        header_redirect('/images/list/q/'.$q);
+        header_redirect('/image/list/q/'.$q);
     }
  
 }
@@ -114,7 +114,7 @@ $result = mysqli_query($connect, $query);
         class="w3-select w3-border w3-margin-top w3-margin-bottom" 
         id="search-type"
         style="max-width: 120px; display: inline-block; box-sizing: border-box; vertical-align: middle;">
-        <option value="images" selected>Images</option>
+        <option value="image" selected>Images</option>
         <option value="video">Video</option>
         <option value="audio">Audio</option>
     </select>
@@ -144,7 +144,7 @@ $result = mysqli_query($connect, $query);
                             <?=$record['name']?>
                         </h4>
                     </header>
-                <a href="/images/details/<?=$record['id']?>" class="w3-margin" style="position: relative; display: block;">
+                <a href="/image/details/<?=$record['id']?>" class="w3-margin" style="position: relative; display: block;">
                     <img src="https://lh3.googleusercontent.com/d/<?=$record['google_id']?>=w800-h500-c" alt="" style="max-width: 100%; height: auto;" />
                 </a>
             </div>
@@ -165,7 +165,7 @@ $result = mysqli_query($connect, $query);
         // Display pagination links
         for ($i = 1; $i <= $total_pages; $i++) 
         {
-            echo '<a href="'.ENV_DOMAIN.'/images/list';
+            echo '<a href="'.ENV_DOMAIN.'/image/list';
             if($i > 1) echo '/page/'.$i;
             if(isset($q)) echo '/q/'.$q;
             echo '" class="w3-button';

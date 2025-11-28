@@ -114,7 +114,7 @@ $result = mysqli_query($connect, $query);
         class="w3-select w3-border w3-margin-top w3-margin-bottom" 
         id="search-type"
         style="max-width: 120px; display: inline-block; box-sizing: border-box; vertical-align: middle;">
-        <option value="images">Images</option>
+        <option value="image">Images</option>
         <option value="video">Video</option>
         <option value="audio" selected>Audio</option>
     </select>
@@ -165,7 +165,7 @@ $result = mysqli_query($connect, $query);
         // Display pagination links
         for ($i = 1; $i <= $total_pages; $i++) 
         {
-            echo '<a href="'.ENV_DOMAIN.'/images/list';
+            echo '<a href="'.ENV_DOMAIN.'/image/list';
             if($i > 1) echo '/page/'.$i;
             if(isset($q)) echo '/q/'.$q;
             echo '" class="w3-button';

@@ -29,7 +29,7 @@ include('../templates/message.php');
         class="w3-select w3-border w3-margin-top w3-margin-bottom" 
         id="search-type"
         style="max-width: 120px; display: inline-block; box-sizing: border-box; vertical-align: middle;">
-        <option value="images" selected>Images</option>
+        <option value="image" selected>Images</option>
         <option value="video">Video</option>
         <option value="audio">Audio</option>
     </select>
@@ -59,7 +59,7 @@ include('../templates/message.php');
                 </h4>
             </header>
             <div class="w3-margin">
-                <a href="/images/list" style="position: relative;">
+                <a href="/image/list" style="position: relative;">
                     <img src="images/images.png" alt="" style="max-width: 100%; height: auto;" />
                 </a>
             </div>
