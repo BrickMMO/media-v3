@@ -20,16 +20,24 @@ mysqli_query($connect, $query);
 $google = setting_fetch('GOOGLE_ACCESS_TOKEN');
 $google = json_decode($google, true);
 
-if($_GET['key'] == 'audio') $setting = 'GOOGLE_DRIVE_AUDIO';
-elseif($_GET['key'] == 'image') $setting = 'GOOGLE_DRIVE_IMAGE';
-elseif($_GET['key'] == 'video') $setting = 'GOOGLE_DRIVE_VIDEO';
+if($_GET['key'] == 'audio')
+{
+    $setting = 'GOOGLE_DRIVE_AUDIO';
+    setting_update('GOOGLE_AUDIO_LAST_IMPORT', date('Y-m-d H:i:s'));
+}
+elseif($_GET['key'] == 'image') 
+{
+    $setting = 'GOOGLE_DRIVE_IMAGE';
+    setting_update('GOOGLE_IMAGE_LAST_IMPORT', date('Y-m-d H:i:s'));
+}
+elseif($_GET['key'] == 'video') 
+{
+    $setting = 'GOOGLE_DRIVE_VIDEO';
+    setting_update('GOOGLE_VIDEO_LAST_IMPORT', date('Y-m-d H:i:s'));
+}
 
 $folder = setting_fetch($setting, 'comma_2_array');
 $type = $_GET['key'];
-
-if($_GET['key'] == 'audio') $redirect = 'audio';
-elseif($_GET['key'] == 'image') $redirect = 'images';
-elseif($_GET['key'] == 'video') $redirect = 'video';
 
 try
 {
