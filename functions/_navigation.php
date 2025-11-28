@@ -37,6 +37,11 @@ function navigation_array($selected = false)
                                     'url' => '/admin/tag/list',
                                     'colour' => 'red',
                                 ],[
+                                    'title' => 'Import Media',
+                                    'url' => '/admin/import',
+                                    'colour' => 'red',
+                                ],[
+                                    
                                     'br' => '---',
                                 ],[
                                     'title' => 'Visit Media App',

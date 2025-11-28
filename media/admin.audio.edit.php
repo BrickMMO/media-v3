@@ -58,7 +58,6 @@ define('PAGE_SELECTED_SUB_PAGE', '/admin/media/audio');
 
 include('../templates/html_header.php');
 include('../templates/nav_header.php');
-include('../templates/nav_slideout.php');
 include('../templates/nav_sidebar.php');
 include('../templates/main_header.php');
 
@@ -72,7 +71,7 @@ $media = media_fetch($_GET['key']);
 
 <h1 class="w3-margin-top w3-margin-bottom">
     <img
-        src="https://cdn.brickmmo.com/icons@1.0.0/bricksum.png"
+        src="https://cdn.brickmmo.com/icons@1.0.0/media.png"
         height="50"
         style="vertical-align: top"
     />

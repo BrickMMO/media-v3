@@ -64,14 +64,14 @@ $result = mysqli_query($connect, $query);
 
 <h1 class="w3-margin-top w3-margin-bottom">
     <img
-        src="https://cdn.brickmmo.com/icons@1.0.0/bricksum.png"
+        src="https://cdn.brickmmo.com/icons@1.0.0/media.png"
         height="50"
         style="vertical-align: top"
     />
     Stock Media
 </h1>
 <p>
-    <a href="/admin/dashboard">Stoxk Media</a> / 
+    <a href="/admin/dashboard">Stock Media</a> / 
     Tags
 </p>
 

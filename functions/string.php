@@ -132,7 +132,6 @@ function string_url($string)
 function string_url_local($url)
 {
 
-    
     if (ENV_LOCAL == true) 
     {
         // Do not convert for GitHub hosted assets
