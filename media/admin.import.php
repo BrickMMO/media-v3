@@ -6,7 +6,7 @@ admin_check();
 define('APP_NAME', 'Stock Media');
 define('PAGE_TITLE', 'Tags');
 define('PAGE_SELECTED_SECTION', 'admin-dashboard');
-define('PAGE_SELECTED_SUB_PAGE', '/admin/tag/list');
+define('PAGE_SELECTED_SUB_PAGE', '/admin/import');
 
 include('../templates/html_header.php');
 include('../templates/nav_header.php');
