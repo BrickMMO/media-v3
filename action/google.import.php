@@ -49,7 +49,7 @@ catch(Exception $e)
 {
 
     message_set('Google API Error', 'Google Access Token has expired.', 'red');
-    header_redirect('/admin/authentication/dashboard');
+    header_redirect('/admin/import');
 
 }
 
