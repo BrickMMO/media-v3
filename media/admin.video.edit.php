@@ -77,8 +77,8 @@ $media = media_fetch($_GET['key']);
     Stock Media
 </h1>
 <p>
-    <a href="/admin/dashboard">Stock Media</a> / 
-    <a href="/admin/video/list">Video</a> / 
+    <a href="<?=ENV_DOMAIN?>/admin/dashboard">Stock Media</a> / 
+    <a href="<?=ENV_DOMAIN?>/admin/video/list">Video</a> / 
     Edit Video
 </p>
 

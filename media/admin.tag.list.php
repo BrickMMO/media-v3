@@ -71,7 +71,7 @@ $result = mysqli_query($connect, $query);
     Stock Media
 </h1>
 <p>
-    <a href="/admin/dashboard">Stock Media</a> / 
+    <a href="<?=ENV_DOMAIN?>/admin/dashboard">Stock Media</a> / 
     Tags
 </p>
 
@@ -104,7 +104,7 @@ $result = mysqli_query($connect, $query);
                 <?=$record['audio_count']?>
             </td>
             <td>
-                <a href="/admin/tag/edit/<?=$record['id']?>">
+                <a href="<?=ENV_DOMAIN?>/admin/tag/edit/<?=$record['id']?>">
                     <i class="fa-solid fa-pencil"></i>
                 </a>
             </td>
@@ -119,7 +119,7 @@ $result = mysqli_query($connect, $query);
 </table>
 
 <a
-    href="/admin/tag/add"
+    href="<?=ENV_DOMAIN?>/admin/tag/add"
     class="w3-button w3-white w3-border"
 >
     <i class="fa-solid fa-tag fa-padding-right"></i> Add New Tag

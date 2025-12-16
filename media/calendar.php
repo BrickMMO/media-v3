@@ -82,14 +82,14 @@ $month_name = date('F Y', $first_day);
     
     <div class="w3-center">
         <h1>Event Calendar</h1>
-        <a href="/list">Upcoming Events</a> | <a href="/calendar">Calendar View</a>
+        <a href="<?=ENV_DOMAIN?>/list">Upcoming Events</a> | <a href="<?=ENV_DOMAIN?>/calendar">Calendar View</a>
     </div>
 
     <hr>
 
     <!-- Calendar Navigation -->
     <div class="w3-bar w3-margin-bottom" style="display: flex; align-items: center;">
-        <a href="/calendar/month/<?=$prev_month?>/year/<?=$prev_year?>" class="w3-button w3-white w3-border">
+        <a href="<?=ENV_DOMAIN?>/calendar/month/<?=$prev_month?>/year/<?=$prev_year?>" class="w3-button w3-white w3-border">
             <i class="fa-solid fa-chevron-left"></i> Previous
         </a>
         
@@ -97,7 +97,7 @@ $month_name = date('F Y', $first_day);
             <h2 style="margin: 0;"><?=$month_name?></h2>
         </div>
         
-        <a href="/calendar/month/<?=$next_month?>/year/<?=$next_year?>" class="w3-button w3-white w3-border">
+        <a href="<?=ENV_DOMAIN?>/calendar/month/<?=$next_month?>/year/<?=$next_year?>" class="w3-button w3-white w3-border">
             Next <i class="fa-solid fa-chevron-right"></i>
         </a>
     </div>
@@ -151,7 +151,7 @@ $month_name = date('F Y', $first_day);
                                                 $thumb_url = $event['thumbnail'] ? $event['thumbnail'] : 'https://cdn.brickmmo.com/images@1.0.0/no-calendar.png';
                                                 echo '<div style="font-size: 11px; margin: 2px 0; padding: 2px; background: #f8f8f8; display: flex; align-items: center; gap: 4px;">';
                                                 echo '<img src="'.$thumb_url.'" style="width: 20px; height: 20px; object-fit: cover; flex-shrink: 0;">';
-                                                echo '<a href="/details/'.$event['id'].'" style="text-decoration: none; color: #333; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">';
+                                                echo '<a href="'.ENV_DOMAIN.'/details/'.$event['id'].'" style="text-decoration: none; color: #333; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">';
                                                 echo htmlspecialchars(strlen($event['name']) > 18 ? substr($event['name'], 0, 18).'...' : $event['name']);
                                                 echo '</a>';
                                                 echo '</div>';

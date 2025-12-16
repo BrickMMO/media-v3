@@ -77,8 +77,8 @@ $media = media_fetch($_GET['key']);
     Media
 </h1>
 <p>
-    <a href="/admin/dashboard">Stock Media</a> / 
-    <a href="/admin/image/list">Images</a> / 
+    <a href="<?=ENV_DOMAIN?>/admin/dashboard">Stock Media</a> / 
+    <a href="<?=ENV_DOMAIN?>/admin/image/list">Images</a> / 
     Edit Media
 </p>
 

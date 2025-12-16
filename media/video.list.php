@@ -144,7 +144,7 @@ $result = mysqli_query($connect, $query);
                             <?=$record['name']?>
                         </h4>
                     </header>
-                <a href="/video/details/<?=$record['id']?>" class="w3-margin" style="position: relative; display: block;">
+                <a href="<?=ENV_DOMAIN?>/video/details/<?=$record['id']?>" class="w3-margin" style="position: relative; display: block;">
                     <img src="https://lh3.googleusercontent.com/d/<?=$record['google_id']?>=w800-h500-c" alt="" style="max-width: 100%; height: auto;" />
                 </a>
             </div>

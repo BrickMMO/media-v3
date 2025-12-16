@@ -60,8 +60,8 @@ $tag = tag_fetch($_GET['key']);
     Stock Media
 </h1>
 <p>
-    <a href="/admin/dashboard">Stock Media</a> / 
-    <a href="/admin/tag/list">Tags</a> / 
+    <a href="<?=ENV_DOMAIN?>/admin/dashboard">Stock Media</a> / 
+    <a href="<?=ENV_DOMAIN?>/admin/tag/list">Tags</a> / 
     Edit Tag
 </p>
 

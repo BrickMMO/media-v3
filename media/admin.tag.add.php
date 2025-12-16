@@ -55,8 +55,8 @@ include('../templates/message.php');
     Media
 </h1>
 <p>
-    <a href="/admin/dashboard">Stock Media</a> / 
-    <a href="/admin/tag/list">Tags</a> / 
+    <a href="<?=ENV_DOMAIN?>/admin/dashboard">Stock Media</a> / 
+    <a href="<?=ENV_DOMAIN?>/admin/tag/list">Tags</a> / 
     Add Tag
 </p>
 

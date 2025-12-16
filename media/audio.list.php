@@ -144,7 +144,7 @@ $result = mysqli_query($connect, $query);
                             <?=$record['name']?>
                         </h4>
                     </header>
-                <a href="/audio/details/<?=$record['id']?>" class="w3-margin" style="position: relative; display: block;">
+                <a href="<?=ENV_DOMAIN?>/audio/details/<?=$record['id']?>" class="w3-margin" style="position: relative; display: block;">
                     <img src="https://cdn.brickmmo.com/images@1.0.0/no-screenshot.png" alt="" style="max-width: 100%; height: auto;" />
                 </a>
             </div>

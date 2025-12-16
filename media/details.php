@@ -61,11 +61,11 @@ $record = mysqli_fetch_assoc($result);
         <i class="fa-solid fa-globe fa-padding-right"></i> Join Online
     </a>
 <?php endif; ?>
-<a href="/list" class="w3-button w3-white w3-border">
+<a href="<?=ENV_DOMAIN?>/list" class="w3-button w3-white w3-border">
     <i class="fa-solid fa-caret-left fa-padding-right"></i>
     Back to Event List
 </a>
-<a href="/calendar" class="w3-button w3-white w3-border">
+<a href="<?=ENV_DOMAIN?>/calendar" class="w3-button w3-white w3-border">
     <i class="fa-solid fa-calendar fa-padding-right"></i>
     Back to Calendar View
 </a>

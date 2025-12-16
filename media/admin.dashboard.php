@@ -88,7 +88,7 @@ $result = mysqli_query($connect, $query);
         <tr>
             <td>
                 <?php if($record['type'] != 'audio'): ?>
-                    <a href="/admin/thumbnail/<?=$record['id'] ?>">
+                    <a href="<?=ENV_DOMAIN?>/admin/thumbnail/<?=$record['id'] ?>">
                         <img src="https://lh3.googleusercontent.com/d/<?=$record['google_id']?>=w800-h800-c" width="70">
                     </a>
                 <?php endif; ?>
@@ -133,7 +133,7 @@ $result = mysqli_query($connect, $query);
 
 <!--
 <a
-    href="/admin/import"
+    href="<?=ENV_DOMAIN?>/admin/import"
     class="w3-button w3-white w3-border"
 >
     <i class="fa-solid fa-download"></i> Import Colours
@@ -153,7 +153,7 @@ $result = mysqli_query($connect, $query);
             <div class="w3-container w3-padding">Uptime Status Summary</div>
             <footer class="w3-container w3-border-top w3-padding">
                 <a
-                    href="/admin/uptime/colours"
+                    href="<?=ENV_DOMAIN?>/admin/uptime/colours"
                     class="w3-button w3-border w3-white"
                 >
                     <i class="fa-regular fa-file-lines fa-padding-right"></i>
@@ -170,7 +170,7 @@ $result = mysqli_query($connect, $query);
             <div class="w3-container w3-padding">App Statistics Summary</div>
             <footer class="w3-container w3-border-top w3-padding">
                 <a
-                    href="/stats/colours"
+                    href="<?=ENV_DOMAIN?>/stats/colours"
                     class="w3-button w3-border w3-white"
                 >
                     <i class="fa-regular fa-chart-bar fa-padding-right"></i> Full Report

@@ -57,7 +57,7 @@ $result = mysqli_query($connect, $query);
     Stock Media
 </h1>
 <p>
-    <a href="/admin/dashboard">Stock Media</a> / 
+    <a href="<?=ENV_DOMAIN?>/admin/dashboard">Stock Media</a> / 
     Audio
 </p>
 
@@ -114,7 +114,7 @@ $result = mysqli_query($connect, $query);
                 </a>
             </td>
             <td class="bm-table-icon">
-                <a href="/admin/image/edit/<?=$record['id']?>">
+                <a href="<?=ENV_DOMAIN?>/admin/image/edit/<?=$record['id']?>">
                     <i class="fa-solid fa-pencil"></i>
                 </a>
             </td>
@@ -124,7 +124,7 @@ $result = mysqli_query($connect, $query);
 </table>
 
 <a
-  href="/action/google/import/audio"
+  href="<?=ENV_DOMAIN?>/action/google/import/audio"
   class="w3-button w3-white w3-border" 
   onclick="loading();"
 >

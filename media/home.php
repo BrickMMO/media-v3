@@ -59,7 +59,7 @@ include('../templates/message.php');
                 </h4>
             </header>
             <div class="w3-margin">
-                <a href="/image/list" style="position: relative;">
+                <a href="<?=ENV_DOMAIN?>/image/list" style="position: relative;">
                     <img src="images/images.png" alt="" style="max-width: 100%; height: auto;" />
                 </a>
             </div>
@@ -77,7 +77,7 @@ include('../templates/message.php');
                 </h4>
             </header>
             <div class="w3-margin">
-                <a href="/video/list" style="position: relative;">
+                <a href="<?=ENV_DOMAIN?>/video/list" style="position: relative;">
                     <img src="images/video.png" alt="" style="max-width: 100%; height: auto;" />
                 </a>
             </div>
@@ -95,7 +95,7 @@ include('../templates/message.php');
                 </h4>
             </header>
             <div class="w3-margin">
-                <a href="/audio/list" style="position: relative;">
+                <a href="<?=ENV_DOMAIN?>/audio/list" style="position: relative;">
                     <img src="images/audio.png" alt="]" style="max-width: 100%; height: auto;" />
                 </a>
             </div>

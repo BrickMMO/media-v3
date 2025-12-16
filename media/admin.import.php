@@ -27,7 +27,7 @@ include('../templates/message.php');
     Stock Media
 </h1>
 <p>
-    <a href="/admin/dashboard">Stock Media</a> / 
+    <a href="<?=ENV_DOMAIN?>/admin/dashboard">Stock Media</a> / 
     Import Media
 </p>
 
@@ -36,7 +36,7 @@ include('../templates/message.php');
 <h2>Import Media</h2>
 
 <a
-    href="/action/google/import/image"
+    href="<?=ENV_DOMAIN?>/action/google/import/image"
     class="w3-button w3-white w3-border"
     onclick="loading();"
 >
@@ -44,7 +44,7 @@ include('../templates/message.php');
 </a>
 
 <a
-    href="/action/google/import/video"
+    href="<?=ENV_DOMAIN?>/action/google/import/video"
     class="w3-button w3-white w3-border"
     onclick="loading();"
 >
@@ -52,7 +52,7 @@ include('../templates/message.php');
 </a>
 
 <a
-    href="/action/google/import/audio"
+    href="<?=ENV_DOMAIN?>/action/google/import/audio"
     class="w3-button w3-white w3-border"
     onclick="loading();"
 >
