@@ -78,7 +78,7 @@ $media = media_fetch($_GET['key']);
     Media
 </h1>
 <p>
-    <a href="<?=ENV_DOMAIN?>/city/dashboard">Dashboard</a> / 
+    <a href="<?=ENV_DOMAIN?>/admin/dashboard">Dashboard</a> / 
     <a href="<?=ENV_DOMAIN?>/admin/media/dashboard">Media</a> / 
     <a href="<?=ENV_DOMAIN?>/admin/media/audio">Audio</a> / 
     Edit Audio
