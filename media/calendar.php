@@ -9,7 +9,6 @@ include('../templates/html_header.php');
 include('../templates/nav_header.php');
 include('../templates/nav_sidebar.php');
 include('../templates/main_header.php');
-
 include('../templates/message.php');
 
 // Get month and year from URL or default to current
@@ -77,102 +76,99 @@ $month_name = date('F Y', $first_day);
 
 ?>
 
-<main>
+
+<div class="w3-center">
+    <h1>Event Calendar</h1>
+    <a href="<?=ENV_DOMAIN?>/list">Upcoming Events</a> | <a href="<?=ENV_DOMAIN?>/calendar">Calendar View</a>
+</div>
+
+<hr>
+
+<!-- Calendar Navigation -->
+<div class="w3-bar w3-margin-bottom" style="display: flex; align-items: center;">
+    <a href="<?=ENV_DOMAIN?>/calendar/month/<?=$prev_month?>/year/<?=$prev_year?>" class="w3-button w3-white w3-border">
+        <i class="fa-solid fa-chevron-left"></i> Previous
+    </a>
     
-    <div class="w3-center">
-        <h1>Event Calendar</h1>
-        <a href="<?=ENV_DOMAIN?>/list">Upcoming Events</a> | <a href="<?=ENV_DOMAIN?>/calendar">Calendar View</a>
+    <div style="flex: 1; text-align: center;">
+        <h2 style="margin: 0;"><?=$month_name?></h2>
     </div>
+    
+    <a href="<?=ENV_DOMAIN?>/calendar/month/<?=$next_month?>/year/<?=$next_year?>" class="w3-button w3-white w3-border">
+        Next <i class="fa-solid fa-chevron-right"></i>
+    </a>
+</div>
 
-    <hr>
-
-    <!-- Calendar Navigation -->
-    <div class="w3-bar w3-margin-bottom" style="display: flex; align-items: center;">
-        <a href="<?=ENV_DOMAIN?>/calendar/month/<?=$prev_month?>/year/<?=$prev_year?>" class="w3-button w3-white w3-border">
-            <i class="fa-solid fa-chevron-left"></i> Previous
-        </a>
-        
-        <div style="flex: 1; text-align: center;">
-            <h2 style="margin: 0;"><?=$month_name?></h2>
-        </div>
-        
-        <a href="<?=ENV_DOMAIN?>/calendar/month/<?=$next_month?>/year/<?=$next_year?>" class="w3-button w3-white w3-border">
-            Next <i class="fa-solid fa-chevron-right"></i>
-        </a>
-    </div>
-
-    <!-- Calendar Grid -->
-    <div class="w3-card w3-white">
-        <header class="w3-container w3-purple">
-            <h2><?=$month_name?></h2>
-        </header>
-        
-        <div style="overflow-x: auto;">
-            <table class="w3-table" style="table-layout: fixed; min-width: 800px;">
-                <thead>
-                    <tr class="w3-light-grey">
-                        <th style="width: 14.28%; text-align: center;">Sunday</th>
-                        <th style="width: 14.28%; text-align: center;">Monday</th>
-                        <th style="width: 14.28%; text-align: center;">Tuesday</th>
-                        <th style="width: 14.28%; text-align: center;">Wednesday</th>
-                        <th style="width: 14.28%; text-align: center;">Thursday</th>
-                        <th style="width: 14.28%; text-align: center;">Friday</th>
-                        <th style="width: 14.28%; text-align: center;">Saturday</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $day_counter = 1;
-                    $calendar_started = false;
-                    
-                    // Calendar rows (max 6 weeks)
-                    for ($week = 0; $week < 6; $week++):
-                        if ($day_counter > $days_in_month) break;
-                    ?>
-                        <tr>
-                            <?php for ($dow = 0; $dow < 7; $dow++): ?>
+<!-- Calendar Grid -->
+<div class="w3-card w3-white">
+    <header class="w3-container w3-purple">
+        <h2><?=$month_name?></h2>
+    </header>
+    
+    <div style="overflow-x: auto;">
+        <table class="w3-table" style="table-layout: fixed; min-width: 800px;">
+            <thead>
+                <tr class="w3-light-grey">
+                    <th style="width: 14.28%; text-align: center;">Sunday</th>
+                    <th style="width: 14.28%; text-align: center;">Monday</th>
+                    <th style="width: 14.28%; text-align: center;">Tuesday</th>
+                    <th style="width: 14.28%; text-align: center;">Wednesday</th>
+                    <th style="width: 14.28%; text-align: center;">Thursday</th>
+                    <th style="width: 14.28%; text-align: center;">Friday</th>
+                    <th style="width: 14.28%; text-align: center;">Saturday</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $day_counter = 1;
+                $calendar_started = false;
+                
+                // Calendar rows (max 6 weeks)
+                for ($week = 0; $week < 6; $week++):
+                    if ($day_counter > $days_in_month) break;
+                ?>
+                    <tr>
+                        <?php for ($dow = 0; $dow < 7; $dow++): ?>
+                            <?php
+                            $is_today = ($day_counter == date('j') && $month == date('n') && $year == date('Y'));
+                            $cell_class = $is_today ? 'w3-light-grey' : '';
+                            ?>
+                            <td class="<?=$cell_class?>" style="vertical-align: top !important; height: 100px; padding: 5px; border: 1px solid #ddd;">
                                 <?php
-                                $is_today = ($day_counter == date('j') && $month == date('n') && $year == date('Y'));
-                                $cell_class = $is_today ? 'w3-light-grey' : '';
-                                ?>
-                                <td class="<?=$cell_class?>" style="vertical-align: top !important; height: 100px; padding: 5px; border: 1px solid #ddd;">
-                                    <?php
-                                    // Check if we should start printing days
-                                    if ($week == 0 && $dow < $day_of_week) {
-                                        // Empty cell before month starts
-                                    } elseif ($day_counter <= $days_in_month) {
-                                        // Print day number
-                                        echo '<div style="font-weight: bold; margin-bottom: 3px;">'.$day_counter.'</div>';
+                                // Check if we should start printing days
+                                if ($week == 0 && $dow < $day_of_week) {
+                                    // Empty cell before month starts
+                                } elseif ($day_counter <= $days_in_month) {
+                                    // Print day number
+                                    echo '<div style="font-weight: bold; margin-bottom: 3px;">'.$day_counter.'</div>';
 
-                                        // Print events for this day
-                                        if (isset($events_by_day[$day_counter])) {
-                                            foreach ($events_by_day[$day_counter] as $event) {
-                                                $thumb_url = $event['thumbnail'] ? $event['thumbnail'] : 'https://cdn.brickmmo.com/images@1.0.0/no-calendar.png';
-                                                echo '<div style="font-size: 11px; margin: 2px 0; padding: 2px; background: #f8f8f8; display: flex; align-items: center; gap: 4px;">';
-                                                echo '<img src="'.$thumb_url.'" style="width: 20px; height: 20px; object-fit: cover; flex-shrink: 0;">';
-                                                echo '<a href="'.ENV_DOMAIN.'/details/'.$event['id'].'" style="text-decoration: none; color: #333; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">';
-                                                echo htmlspecialchars(strlen($event['name']) > 18 ? substr($event['name'], 0, 18).'...' : $event['name']);
-                                                echo '</a>';
-                                                echo '</div>';
-                                            }
+                                    // Print events for this day
+                                    if (isset($events_by_day[$day_counter])) {
+                                        foreach ($events_by_day[$day_counter] as $event) {
+                                            $thumb_url = $event['thumbnail'] ? $event['thumbnail'] : 'https://cdn.brickmmo.com/images@1.0.0/no-calendar.png';
+                                            echo '<div style="font-size: 11px; margin: 2px 0; padding: 2px; background: #f8f8f8; display: flex; align-items: center; gap: 4px;">';
+                                            echo '<img src="'.$thumb_url.'" style="width: 20px; height: 20px; object-fit: cover; flex-shrink: 0;">';
+                                            echo '<a href="'.ENV_DOMAIN.'/details/'.$event['id'].'" style="text-decoration: none; color: #333; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">';
+                                            echo htmlspecialchars(strlen($event['name']) > 18 ? substr($event['name'], 0, 18).'...' : $event['name']);
+                                            echo '</a>';
+                                            echo '</div>';
                                         }
-
-                                        $day_counter++;
-                                    } else {
-                                        // Empty cell after month ends
-                                        echo '&nbsp;';
                                     }
-                                    ?>
-                                </td>
-                            <?php endfor; ?>
-                        </tr>
-                    <?php endfor; ?>
-                </tbody>
-            </table>
-        </div>
-    </div>
 
-</main>
+                                    $day_counter++;
+                                } else {
+                                    // Empty cell after month ends
+                                    echo '&nbsp;';
+                                }
+                                ?>
+                            </td>
+                        <?php endfor; ?>
+                    </tr>
+                <?php endfor; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
 
 <?php
 

@@ -8,8 +8,10 @@ if(
     !is_numeric($_GET['key']) || 
     !media_fetch($_GET['key']))
 {
+
     message_set('Audio Error', 'There was an error with the provided audio.');
     header_redirect('/admin/media/audio');
+
 }
 elseif ($_SERVER['REQUEST_METHOD'] == 'POST') 
 {
@@ -17,8 +19,10 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST')
     // Basic serverside validation
     if (!validate_blank($_POST['name']))
     {
+
         message_set('Audio Error', 'There was an error with the provided audio.', 'red');
         header_redirect('/admin/media/audio');
+
     }
     
     $query = 'UPDATE media SET
@@ -35,6 +39,7 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST')
 
     foreach($_POST['tag_id'] as $value)
     {
+
         $query = 'INSERT INTO media_tag (
                 tag_id,
                 media_id
@@ -43,6 +48,7 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST')
                 "'.$_GET['key'].'"
             )';
         mysqli_query($connect, $query);
+
     }
 
     message_set('Audio Success', 'Your audio has been edited.');
@@ -51,7 +57,6 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST')
 }
 
 define('APP_NAME', 'Media');
-
 define('PAGE_TITLE','Edit Audio');
 define('PAGE_SELECTED_SECTION', 'admin-content');
 define('PAGE_SELECTED_SUB_PAGE', '/admin/media/audio');
@@ -60,14 +65,11 @@ include('../templates/html_header.php');
 include('../templates/nav_header.php');
 include('../templates/nav_sidebar.php');
 include('../templates/main_header.php');
-
 include('../templates/message.php');
 
 $media = media_fetch($_GET['key']);
 
 ?>
-
-<!-- CONTENT -->
 
 <h1 class="w3-margin-top w3-margin-bottom">
     <img
@@ -77,6 +79,7 @@ $media = media_fetch($_GET['key']);
     />
     Media
 </h1>
+
 <p>
     <a href="<?=ENV_DOMAIN?>/admin/dashboard">Dashboard</a> / 
     <a href="<?=ENV_DOMAIN?>/admin/media/dashboard">Media</a> / 
@@ -89,14 +92,15 @@ $media = media_fetch($_GET['key']);
 <h2>Edit Media: <?=$media['name']?></h2>
 
 <?php if($media['google_id']): ?>
+
     <iframe src="https://drive.google.com/file/d/<?=$media['google_id']?>/preview" 
         width="426" 
         height="100" 
         allow="autoplay"
         style="border: none"
         class="w3-padding w3-border w3-margin-bottom"></iframe>
-<?php endif; ?>
 
+<?php endif; ?>
 
 <form
     method="post"
@@ -130,6 +134,7 @@ $media = media_fetch($_GET['key']);
         <i class="fa-solid fa-headphones fa-padding-right"></i>
         Edit Audio
     </button>
+
 </form>
 
 <script>
@@ -150,7 +155,6 @@ $media = media_fetch($_GET['key']);
 
 </script>
     
-
 <?php
 
 include('../templates/modal_city.php');

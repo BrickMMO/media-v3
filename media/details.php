@@ -9,7 +9,6 @@ include('../templates/html_header.php');
 include('../templates/nav_header.php');
 include('../templates/nav_sidebar.php');
 include('../templates/main_header.php');
-
 include('../templates/message.php');
 
 $query = 'SELECT *
@@ -20,7 +19,6 @@ $result = mysqli_query($connect, $query);
 $record = mysqli_fetch_assoc($result);
 
 ?>
-
 
 <div class="w3-center">
     <h1><?=$record['name']?></h1>

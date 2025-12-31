@@ -12,7 +12,6 @@ include('../templates/html_header.php');
 include('../templates/nav_header.php');
 include('../templates/nav_sidebar.php');
 include('../templates/main_header.php');
-
 include('../templates/message.php');    
 
 $query = 'SELECT *
@@ -53,8 +52,6 @@ $query = 'SELECT media.*,(
 $result = mysqli_query($connect, $query);
 
 ?>
-
-<!-- CONTENT -->
 
 <h1 class="w3-margin-top w3-margin-bottom">
     <img

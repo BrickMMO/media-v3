@@ -45,8 +45,6 @@ $result = mysqli_query($connect, $query);
 
 ?>
 
-<!-- CONTENT -->
-
 <h1 class="w3-margin-top w3-margin-bottom">
     <img
         src="https://cdn.brickmmo.com/icons@1.0.0/media.png"
@@ -55,6 +53,7 @@ $result = mysqli_query($connect, $query);
     />
     Stock Media
 </h1>
+
 <p>
     <a href="<?=ENV_DOMAIN?>/admin/dashboard">Stock Media</a> / 
     Images

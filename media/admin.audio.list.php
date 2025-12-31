@@ -19,7 +19,6 @@ if (isset($_GET['approve']))
 
 
 define('APP_NAME', 'Stock Media');
-
 define('PAGE_TITLE', 'Audio');
 define('PAGE_SELECTED_SECTION', 'admin-content');
 define('PAGE_SELECTED_SUB_PAGE', '/admin/audio/list');
@@ -46,8 +45,6 @@ $result = mysqli_query($connect, $query);
 
 ?>
 
-<!-- CONTENT -->
-
 <h1 class="w3-margin-top w3-margin-bottom">
     <img
         src="https://cdn.brickmmo.com/icons@1.0.0/media.png"
@@ -56,6 +53,7 @@ $result = mysqli_query($connect, $query);
     />
     Stock Media
 </h1>
+
 <p>
     <a href="<?=ENV_DOMAIN?>/admin/dashboard">Stock Media</a> / 
     Audio

@@ -8,8 +8,10 @@ if(
     !is_numeric($_GET['key']) || 
     !media_fetch($_GET['key']))
 {
+
     message_set('Image Error', 'There was an error with the provided image.');
     header_redirect('/admin/images/list');
+
 }
 elseif ($_SERVER['REQUEST_METHOD'] == 'POST') 
 {
@@ -17,8 +19,10 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST')
     // Basic serverside validation
     if (!validate_blank($_POST['name']))
     {
+
         message_set('Image Error', 'There was an error with the provided image.', 'red');
         header_redirect('/admin/image/list');   
+
     }
     
     $query = 'UPDATE media SET
@@ -35,6 +39,7 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST')
 
     foreach($_POST['tag_id'] as $value)
     {
+
         $query = 'INSERT INTO media_tag (
                 tag_id,
                 media_id
@@ -43,6 +48,7 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST')
                 "'.$_GET['key'].'"
             )';
         mysqli_query($connect, $query);
+
     }
 
     message_set('Image Success', 'Your image has been edited.');
@@ -59,14 +65,11 @@ include('../templates/html_header.php');
 include('../templates/nav_header.php');
 include('../templates/nav_sidebar.php');
 include('../templates/main_header.php');
-
 include('../templates/message.php');
 
 $media = media_fetch($_GET['key']);
 
 ?>
-
-<!-- CONTENT -->
 
 <h1 class="w3-margin-top w3-margin-bottom">
     <img
@@ -76,6 +79,7 @@ $media = media_fetch($_GET['key']);
     />
     Media
 </h1>
+
 <p>
     <a href="<?=ENV_DOMAIN?>/admin/dashboard">Stock Media</a> / 
     <a href="<?=ENV_DOMAIN?>/admin/image/list">Images</a> / 
@@ -87,9 +91,10 @@ $media = media_fetch($_GET['key']);
 <h2>Edit Media: <?=$media['name']?></h2>
 
 <?php if($media['google_id']): ?>
-    <img src="https://lh3.googleusercontent.com/d/<?=$media['google_id']?>=w500-h500" class="w3-padding w3-border w3-margin-bottom">
-<?php endif; ?>
 
+    <img src="https://lh3.googleusercontent.com/d/<?=$media['google_id']?>=w500-h500" class="w3-padding w3-border w3-margin-bottom">
+    
+<?php endif; ?>
 
 <form
     method="post"
@@ -123,6 +128,7 @@ $media = media_fetch($_GET['key']);
         <i class="fa-solid fa-image fa-padding-right"></i>
         Edit Image
     </button>
+    
 </form>
 
 <script>

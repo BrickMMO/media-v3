@@ -9,7 +9,6 @@ include('../templates/html_header.php');
 include('../templates/nav_header.php');
 include('../templates/nav_sidebar.php');
 include('../templates/main_header.php');
-
 include('../templates/message.php');
 
 ?>
@@ -107,51 +106,51 @@ include('../templates/message.php');
 
 <script>
 
-(function() {
+    (function() {
 
-    let searchButton = document.getElementById('search-button');
-    let searchTerm = document.getElementById('search-term');
-    let searchType = document.getElementById('search-type');
+        let searchButton = document.getElementById('search-button');
+        let searchTerm = document.getElementById('search-term');
+        let searchType = document.getElementById('search-type');
 
-    function performSearch() 
-    {
-
-        let query = searchTerm.value.trim();
-
-        if (query !== '') {
-            // Remove anything that's not letters, numbers, or spaces
-            query = query.replace(/[^a-zA-Z0-9\s]/g, '');
-            // Replace spaces with hyphens
-            query = query.replace(/\s+/g, '-');
-            window.location.href = '/' + searchType.value + '/list/q/' + query;
-        }
-        else
+        function performSearch() 
         {
-            window.location.href = '/' + searchType.value + '/list';
+
+            let query = searchTerm.value.trim();
+
+            if (query !== '') {
+                // Remove anything that's not letters, numbers, or spaces
+                query = query.replace(/[^a-zA-Z0-9\s]/g, '');
+                // Replace spaces with hyphens
+                query = query.replace(/\s+/g, '-');
+                window.location.href = '/' + searchType.value + '/list/q/' + query;
+            }
+            else
+            {
+                window.location.href = '/' + searchType.value + '/list';
+            }
+
         }
 
-    }
-
-    searchButton.addEventListener('click', function(event) 
-    {
-
-        event.preventDefault();
-        performSearch();
-
-    });
-
-    searchTerm.addEventListener('keypress', function(event) 
-    {
-
-        if (event.key === 'Enter') 
+        searchButton.addEventListener('click', function(event) 
         {
+
             event.preventDefault();
             performSearch();
-        }
 
-    });
+        });
 
-})();
+        searchTerm.addEventListener('keypress', function(event) 
+        {
+
+            if (event.key === 'Enter') 
+            {
+                event.preventDefault();
+                performSearch();
+            }
+
+        });
+
+    })();
 
 </script>
 

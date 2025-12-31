@@ -52,7 +52,6 @@ include('../templates/html_header.php');
 include('../templates/nav_header.php');
 include('../templates/nav_sidebar.php');
 include('../templates/main_header.php');
-
 include('../templates/message.php');
 
 $query = 'SELECT media.*,
@@ -76,7 +75,9 @@ $result = mysqli_query($connect, $query);
 $tags = array();
 while($record = mysqli_fetch_assoc($result))
 {
+
     $tags[] = $record;
+
 }
 
 ?>

@@ -6,7 +6,9 @@ if(isset($_GET['q']))
     $q = string_url($_GET['q']);
     if($q != $_GET['q'])
     {
+
         header_redirect('/image/list/q/'.$q);
+
     }
  
 }
@@ -14,25 +16,27 @@ if(isset($_GET['q']))
 // Get page number from URL if set
 if(isset($_GET['page']) && is_numeric($_GET['page']))
 {
+
     $current_page = (int)$_GET['page'];
+
 }
 else
 {
+
     $current_page = 1;
+
 }
 
 define('APP_NAME', 'Stock Media');
 define('PAGE_TITLE', 'Images');
 define('PAGE_SELECTED_SECTION', '');
 define('PAGE_SELECTED_SUB_PAGE', '');
-
 define('THEME_WIDTH', '100%');
 
 include('../templates/html_header.php');
 include('../templates/nav_header.php');
 include('../templates/nav_sidebar.php');
 include('../templates/main_header.php');
-
 include('../templates/message.php');
 
 $query = 'SELECT *

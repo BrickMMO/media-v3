@@ -16,8 +16,6 @@ include('../templates/message.php');
 
 ?>
 
-<!-- CONTENT -->
-
 <h1 class="w3-margin-top w3-margin-bottom">
     <img
         src="https://cdn.brickmmo.com/icons@1.0.0/media.png"
@@ -26,6 +24,7 @@ include('../templates/message.php');
     />
     Stock Media
 </h1>
+
 <p>
     <a href="<?=ENV_DOMAIN?>/admin/dashboard">Stock Media</a> / 
     Import Media

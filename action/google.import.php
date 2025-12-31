@@ -2,8 +2,10 @@
 
 if(!isset($_GET['key']) || !$_GET['key'])
 {
+
     message_set('Google API Error', 'There was an error importing Google Drive media.', 'red');
     header_redirect('/admin/media/dashboard');
+
 }
 
 /*
@@ -22,18 +24,24 @@ $google = json_decode($google, true);
 
 if($_GET['key'] == 'audio')
 {
+
     $setting = 'GOOGLE_DRIVE_AUDIO';
     setting_update('GOOGLE_AUDIO_LAST_IMPORT', date('Y-m-d H:i:s'));
+
 }
 elseif($_GET['key'] == 'image') 
 {
+
     $setting = 'GOOGLE_DRIVE_IMAGE';
     setting_update('GOOGLE_IMAGE_LAST_IMPORT', date('Y-m-d H:i:s'));
+
 }
 elseif($_GET['key'] == 'video') 
 {
+
     $setting = 'GOOGLE_DRIVE_VIDEO';
     setting_update('GOOGLE_VIDEO_LAST_IMPORT', date('Y-m-d H:i:s'));
+
 }
 
 $folder = setting_fetch($setting, 'comma_2_array');
@@ -57,6 +65,7 @@ $media = 0;
 
 foreach($files as $key => $file)
 {
+
     $query = 'SELECT *
         FROM media 
         WHERE google_id = "'.$file['google_id'].'"
@@ -98,6 +107,7 @@ foreach($files as $key => $file)
 
         foreach($tags as $tag)
         {
+
             $query = 'SELECT *
                 FROM tags 
                 WHERE name = "'.$tag.'"
@@ -106,6 +116,7 @@ foreach($files as $key => $file)
 
             if(!mysqli_num_rows($result))
             {
+
                 $query = 'INSERT INTO tags (
                         name,
                         created_at,
@@ -118,11 +129,14 @@ foreach($files as $key => $file)
                 mysqli_query($connect, $query); 
 
                 $tag_id = mysqli_insert_id($connect);
+
             }
             else
             {
+
                 $record = mysqli_fetch_assoc($result);
                 $tag_id = $record['id'];
+
             }
 
             $query = 'INSERT INTO media_tag (
@@ -149,4 +163,3 @@ message_set(
 );
 
 header_redirect(ENV_DOMAIN.'/admin/import');
-

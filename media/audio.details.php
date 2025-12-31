@@ -50,7 +50,6 @@ include('../templates/html_header.php');
 include('../templates/nav_header.php');
 include('../templates/nav_sidebar.php');
 include('../templates/main_header.php');
-
 include('../templates/message.php');
 
 $query = 'SELECT media.*,
@@ -74,7 +73,9 @@ $result = mysqli_query($connect, $query);
 $tags = array();
 while($record = mysqli_fetch_assoc($result))
 {
+
     $tags[] = $record;
+
 }
 
 ?>
@@ -85,6 +86,7 @@ while($record = mysqli_fetch_assoc($result))
         height: 0;
         overflow: hidden;"
     class="w3-margin-top">
+
     <iframe 
         width="100%" 
         height="70" 
@@ -96,6 +98,7 @@ while($record = mysqli_fetch_assoc($result))
             width: 100%;
             height: 100%;"
         allowfullscreen></iframe>
+
 </div>
 
 <div class="w3-purple w3-container">

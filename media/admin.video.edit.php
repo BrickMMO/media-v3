@@ -8,8 +8,10 @@ if(
     !is_numeric($_GET['key']) || 
     !media_fetch($_GET['key']))
 {
+
     message_set('Video Error', 'There was an error with the provided video.');
     header_redirect('/admin/video/list');
+
 }
 elseif ($_SERVER['REQUEST_METHOD'] == 'POST') 
 {
@@ -17,8 +19,10 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST')
     // Basic serverside validation
     if (!validate_blank($_POST['name']))
     {
+
         message_set('Video Error', 'There was an error with the provided video.', 'red');
         header_redirect('/admin/video/list');
+
     }
     
     $query = 'UPDATE media SET
@@ -35,6 +39,7 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST')
 
     foreach($_POST['tag_id'] as $value)
     {
+
         $query = 'INSERT INTO media_tag (
                 tag_id,
                 media_id
@@ -43,6 +48,7 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST')
                 "'.$_GET['key'].'"
             )';
         mysqli_query($connect, $query);
+
     }
 
     message_set('Video Success', 'Your video has been edited.');
@@ -51,7 +57,6 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST')
 }
 
 define('APP_NAME', 'Stock Media');
-
 define('PAGE_TITLE','Edit Video');
 define('PAGE_SELECTED_SECTION', 'admin-content');
 define('PAGE_SELECTED_SUB_PAGE', '/admin/video/list');
@@ -66,8 +71,6 @@ $media = media_fetch($_GET['key']);
 
 ?>
 
-<!-- CONTENT -->
-
 <h1 class="w3-margin-top w3-margin-bottom">
     <img
         src="https://cdn.brickmmo.com/icons@1.0.0/media.png"
@@ -76,6 +79,7 @@ $media = media_fetch($_GET['key']);
     />
     Stock Media
 </h1>
+
 <p>
     <a href="<?=ENV_DOMAIN?>/admin/dashboard">Stock Media</a> / 
     <a href="<?=ENV_DOMAIN?>/admin/video/list">Video</a> / 
@@ -87,12 +91,14 @@ $media = media_fetch($_GET['key']);
 <h2>Edit Media: <?=$media['name']?></h2>
 
 <?php if($media['google_id']): ?>
+
     <iframe src="https://drive.google.com/file/d/<?=$media['google_id']?>/preview" 
         width="426" 
         height="240" 
         allow="autoplay"
         style="border: none"
         class="w3-padding w3-border w3-margin-bottom"></iframe>
+
 <?php endif; ?>
 
 <form
@@ -127,6 +133,7 @@ $media = media_fetch($_GET['key']);
         <i class="fa-solid fa-video fa-padding-right"></i>
         Edit Video
     </button>
+    
 </form>
 
 <script>

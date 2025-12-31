@@ -8,8 +8,10 @@ if(
     !is_numeric($_GET['key']) || 
     !tag_fetch($_GET['key']))
 {
+
     message_set('Tag Error', 'There was an error with the provided tag.');
     header_redirect('/admin/tag/list');
+
 }
 elseif ($_SERVER['REQUEST_METHOD'] == 'POST') 
 {
@@ -20,6 +22,7 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST')
 
         message_set('Tag Error', 'There was an error with the provided tag.', 'red');
         header_redirect('/admin/tag/list');
+
     }
     
     $query = 'UPDATE tags SET
@@ -49,8 +52,6 @@ $tag = tag_fetch($_GET['key']);
 
 ?>
 
-<!-- CONTENT -->
-
 <h1 class="w3-margin-top w3-margin-bottom">
     <img
         src="https://cdn.brickmmo.com/icons@1.0.0/media.png"
@@ -59,6 +60,7 @@ $tag = tag_fetch($_GET['key']);
     />
     Stock Media
 </h1>
+
 <p>
     <a href="<?=ENV_DOMAIN?>/admin/dashboard">Stock Media</a> / 
     <a href="<?=ENV_DOMAIN?>/admin/tag/list">Tags</a> / 
@@ -91,6 +93,7 @@ $tag = tag_fetch($_GET['key']);
         <i class="fa-solid fa-tag fa-padding-right"></i>
         Edit Tag
     </button>
+
 </form>
 
 <script>
@@ -110,7 +113,6 @@ $tag = tag_fetch($_GET['key']);
     }
 
 </script>
-    
 
 <?php
 

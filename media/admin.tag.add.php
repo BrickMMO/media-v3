@@ -9,8 +9,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     // Basic serverside validation
     if (!validate_blank($_POST['name']))
     {
+
         message_set('Tag Error', 'There was an error with the provided tag.', 'red');
         header_redirect('/admin/tag/add');
+
     }
     
     $query = 'INSERT INTO tags (
@@ -30,7 +32,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 }
 
 define('APP_NAME', 'Media');
-
 define('PAGE_TITLE', 'Add Tag');
 define('PAGE_SELECTED_SECTION', 'admin-content');
 define('PAGE_SELECTED_SUB_PAGE', '/admin/tag/list');
@@ -39,12 +40,9 @@ include('../templates/html_header.php');
 include('../templates/nav_header.php');
 include('../templates/nav_sidebar.php');
 include('../templates/main_header.php');
-
 include('../templates/message.php');
 
 ?>
-
-<!-- CONTENT -->
 
 <h1 class="w3-margin-top w3-margin-bottom">
     <img
@@ -54,6 +52,7 @@ include('../templates/message.php');
     />
     Media
 </h1>
+
 <p>
     <a href="<?=ENV_DOMAIN?>/admin/dashboard">Stock Media</a> / 
     <a href="<?=ENV_DOMAIN?>/admin/tag/list">Tags</a> / 
@@ -85,6 +84,7 @@ include('../templates/message.php');
         <i class="fa-solid fa-tag fa-padding-right"></i>
         Add Tag
     </button>
+
 </form>
 
 <script>
@@ -105,7 +105,6 @@ include('../templates/message.php');
 
 </script>
     
-
 <?php
 
 include('../templates/main_footer.php');
